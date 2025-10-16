@@ -316,11 +316,12 @@ jane.doe@vendor.com"></textarea>
                             <th>Interaction Summary</th>
                             <th>Key Contacts</th>
                             <th>Detailed Notes</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody id="table-body">
                         <tr>
-                            <td colspan="4" class="loading">Loading data...</td>
+                            <td colspan="5" class="loading">Loading data...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -413,7 +414,7 @@ jane.doe@vendor.com"></textarea>
             })
             .catch(error => {
                 document.getElementById('table-body').innerHTML = 
-                    '<tr><td colspan="4" class="loading">Error loading data. Please check your webhook configuration.</td></tr>';
+                    '<tr><td colspan="5" class="loading">Error loading data. Please check your webhook configuration.</td></tr>';
                 console.error('Database load error:', error);
             });
         }
@@ -422,7 +423,7 @@ jane.doe@vendor.com"></textarea>
             const tbody = document.getElementById('table-body');
             
             if (records.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="loading">No records found. Submit your first interaction below!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" class="loading">No records found. Submit your first interaction below!</td></tr>';
                 return;
             }
 
@@ -432,6 +433,7 @@ jane.doe@vendor.com"></textarea>
                     <td>${record.summary || 'N/A'}</td>
                     <td style="white-space: pre-line;">${record.contacts || 'N/A'}</td>
                     <td style="white-space: pre-line;">${record.notes || 'N/A'}</td>
+                    <td>${record.date || 'N/A'}</td>
                 </tr>
             `).join('');
         }
@@ -450,6 +452,11 @@ jane.doe@vendor.com"></textarea>
         // Form submission
         document.getElementById('submission-form').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Disable button while submitting
+            const submitBtn = document.querySelector('#submission-form .btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
 
             const formData = {
                 vendorName: document.getElementById('vendor-name').value,
@@ -488,6 +495,11 @@ jane.doe@vendor.com"></textarea>
                 errorMsg.style.display = 'block';
                 setTimeout(() => errorMsg.style.display = 'none', 5000);
                 console.error('Submission error:', error);
+            })
+            .finally(() => {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Interaction';
             });
         });
 
