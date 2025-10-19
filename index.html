@@ -1,102 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vendor Contact Repository</title>
-<style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Contact Repository</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-min-height: 100vh;
-padding: 20px;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.container {
-max-width: 1200px;
-margin: 0 auto;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-h1 {
-color: white;
-text-align: center;
-margin-bottom: 30px;
-font-size: 2.5em;
-}
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
 
-.section {
-background: white;
-border-radius: 12px;
-padding: 30px;
-margin-bottom: 30px;
-box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-}
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
 
-.section h2 {
-color: #667eea;
-margin-bottom: 20px;
-font-size: 1.8em;
-border-bottom: 3px solid #667eea;
-padding-bottom: 10px;
-}
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
 
-/* Chat Section */
-#chat-section {
-min-height: 300px;
-}
+        /* Chat Section */
+        #chat-section {
+            min-height: 300px;
+        }
 
-.chat-messages {
-background: #f8f9fa;
-border-radius: 8px;
-padding: 20px;
-min-height: 200px;
-max-height: 400px;
-overflow-y: auto;
-margin-bottom: 20px;
-}
+        .chat-messages {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
 
-.message {
-margin-bottom: 15px;
-padding: 12px 16px;
-border-radius: 8px;
-max-width: 80%;
-}
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
 
-.user-message {
-background: #667eea;
-color: white;
-margin-left: auto;
-text-align: right;
-}
+        .user-message {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
 
-.bot-message {
-background: white;
-color: #333;
-border: 1px solid #e0e0e0;
-white-space: pre-wrap;
-word-wrap: break-word;
-}
+        .bot-message {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
 
-.chat-input-container {
-display: flex;
-gap: 10px;
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
             align-items: flex-end;
-}
+        }
 
-#chat-input {
-flex: 1;
-padding: 15px;
-border: 2px solid #e0e0e0;
-border-radius: 8px;
-font-size: 16px;
-transition: border-color 0.3s;
-}
+        #chat-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
 
         .input-wrapper {
             flex: 1;
@@ -152,170 +152,166 @@ transition: border-color 0.3s;
             line-height: 1;
         }
 
-#chat-input:focus {
-outline: none;
-border-color: #667eea;
-}
+        #chat-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
 
-.btn {
-padding: 15px 30px;
-background: #667eea;
-color: white;
-border: none;
-border-radius: 8px;
-font-size: 16px;
-font-weight: 600;
-cursor: pointer;
-transition: background 0.3s;
-}
+        .btn {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-.btn:hover {
-background: #5568d3;
-}
+        .btn:hover {
+            background: #5568d3;
+        }
 
-.btn:disabled {
-background: #ccc;
-cursor: not-allowed;
-}
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
 
-/* Database Section */
-.search-box {
-margin-bottom: 20px;
-}
+        /* Database Section */
+        .search-box {
+            margin-bottom: 20px;
+        }
 
-#database-search {
-width: 100%;
-padding: 12px;
-border: 2px solid #e0e0e0;
-border-radius: 8px;
-font-size: 16px;
-}
+        #database-search {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-#database-search:focus {
-outline: none;
-border-color: #667eea;
-}
+        #database-search:focus {
+            outline: none;
+            border-color: #667eea;
+        }
 
-.database-table {
-width: 100%;
-overflow-x: auto;
-}
+        .database-table {
+            width: 100%;
+            overflow-x: auto;
+        }
 
-table {
-width: 100%;
-border-collapse: collapse;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-thead {
-background: #667eea;
-color: white;
-}
+        thead {
+            background: #667eea;
+            color: white;
+        }
 
-th, td {
-padding: 12px;
-text-align: left;
-border-bottom: 1px solid #e0e0e0;
-}
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
 
-th {
-font-weight: 600;
-}
+        th {
+            font-weight: 600;
+        }
 
-tbody tr:hover {
-background: #f8f9fa;
-}
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
 
-.loading {
-text-align: center;
-padding: 40px;
-color: #666;
-}
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
 
-/* Form Section */
-.form-group {
-margin-bottom: 20px;
-}
+        /* Form Section */
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-label {
-display: block;
-margin-bottom: 8px;
-color: #333;
-font-weight: 600;
-}
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-select,
-textarea {
-width: 100%;
-padding: 12px;
-border: 2px solid #e0e0e0;
-border-radius: 8px;
-font-size: 16px;
-font-family: inherit;
-transition: border-color 0.3s;
-}
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
 
-input:focus,
-select:focus,
-textarea:focus {
-outline: none;
-border-color: #667eea;
-}
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
 
-textarea {
-min-height: 100px;
-resize: vertical;
-}
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
 
-.form-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 20px;
-}
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
 
-@media (max-width: 768px) {
-.form-row {
-grid-template-columns: 1fr;
-}
-}
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
 
-.success-message {
-background: #4caf50;
-color: white;
-padding: 15px;
-border-radius: 8px;
-margin-bottom: 20px;
-display: none;
-}
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
 
-.error-message {
-background: #f44336;
-color: white;
-padding: 15px;
-border-radius: 8px;
-margin-bottom: 20px;
-display: none;
-}
-</style>
+        .error-message {
+            background: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>📋 Vendor Contact Repository</h1>
+    <div class="container">
+        <h1>📋 Vendor Contact Repository</h1>
 
-<!-- Chat Section -->
-<div class="section" id="chat-section">
-<h2>💬 Ask About Vendors</h2>
-<div class="chat-messages" id="chat-messages">
-                <div class="message bot-message">
-                    👋 Hello! I'm here to help you find or submit internal or external contacts or programs that can help you or your colleagues in your business. Ask me anything about vendors, problems you are looking to overcome, or internal or external funds that might be of interest to you. For example: "Do we have any warchest funds for takeouts?" or "Show me who we escalated issues to at Dell who help to get around a pricing issue."
-                </div>
+        <!-- Chat Section -->
+        <div class="section" id="chat-section">
+            <h2>💬 Ask About Vendors</h2>
+            <div class="chat-messages" id="chat-messages">
                 <div class="message bot-message">👋 Hello! I'm here to help you find or submit internal or external contacts or programs that can help you or your colleagues in your business. Ask me anything about vendors, problems you are looking to overcome, or internal or external funds that might be of interest to you. For example: "Do we have any warchest funds for takeouts?" or "Show me who we escalated issues to at Dell who help to get around a pricing issue."</div>
-</div>
-<div class="chat-input-container">
-                <input type="text" id="chat-input" placeholder="Ask about vendors, contacts, or past issues..." />
+            </div>
+            <div class="chat-input-container">
                 <div class="input-wrapper">
                     <input type="text" id="chat-input" placeholder="Ask about vendors, contacts, or past issues..." />
                     <div class="file-upload-container" id="image-preview-container" style="display: none;">
@@ -325,29 +321,29 @@ display: none;
                 </div>
                 <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)" />
                 <button class="upload-btn" onclick="document.getElementById('image-upload').click()">Image</button>
-<button class="btn" id="send-btn" onclick="sendMessage()">Send</button>
-</div>
-</div>
+                <button class="btn" id="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
 
-<!-- Submission Form -->
-<div class="section" id="form-section">
-<h2>➕ Submit New Interaction</h2>
-<div class="success-message" id="success-message">✅ Successfully submitted!</div>
-<div class="error-message" id="error-message">❌ Error submitting. Please try again.</div>
-<form id="submission-form">
-<div class="form-group">
-<label for="vendor-name">Vendor *</label>
-<input type="text" id="vendor-name" required placeholder="e.g., Dell, HP, ComputaCenter (Internal), CDW..." />
-</div>
+        <!-- Submission Form -->
+        <div class="section" id="form-section">
+            <h2>➕ Submit New Interaction</h2>
+            <div class="success-message" id="success-message">✅ Successfully submitted!</div>
+            <div class="error-message" id="error-message">❌ Error submitting. Please try again.</div>
+            <form id="submission-form">
+                <div class="form-group">
+                    <label for="vendor-name">Vendor *</label>
+                    <input type="text" id="vendor-name" required placeholder="e.g., Dell, HP, ComputaCenter (Internal), CDW..." />
+                </div>
 
-<div class="form-group">
-<label for="interaction-summary">What was this interaction about? *</label>
-<textarea id="interaction-summary" required placeholder="Brief summary... (e.g., 'Used a special promotion to close a large laptop deal' or 'Found a workaround for their supply chain issue')"></textarea>
-</div>
+                <div class="form-group">
+                    <label for="interaction-summary">What was this interaction about? *</label>
+                    <textarea id="interaction-summary" required placeholder="Brief summary... (e.g., 'Used a special promotion to close a large laptop deal' or 'Found a workaround for their supply chain issue')"></textarea>
+                </div>
 
-<div class="form-group">
-<label for="helpful-contacts">Contacts Who Helped You</label>
-<textarea id="helpful-contacts" placeholder="Paste signature blocks or contact info here. You can include multiple contacts.
+                <div class="form-group">
+                    <label for="helpful-contacts">Contacts Who Helped You</label>
+                    <textarea id="helpful-contacts" placeholder="Paste signature blocks or contact info here. You can include multiple contacts.
 
 Example:
 John Smith
@@ -358,64 +354,64 @@ john.smith@vendor.com
 Jane Doe
 Sales Engineer
 jane.doe@vendor.com"></textarea>
-</div>
+                </div>
 
-<div class="form-group">
-<label for="detailed-notes">Detailed Notes *</label>
-<textarea id="detailed-notes" required style="min-height: 150px;" placeholder="Tell the full story... What happened? How did you overcome the challenge? What specifically worked? What should others know?"></textarea>
-</div>
+                <div class="form-group">
+                    <label for="detailed-notes">Detailed Notes *</label>
+                    <textarea id="detailed-notes" required style="min-height: 150px;" placeholder="Tell the full story... What happened? How did you overcome the challenge? What specifically worked? What should others know?"></textarea>
+                </div>
 
-<button type="submit" class="btn">Submit Interaction</button>
-</form>
-</div>
+                <button type="submit" class="btn">Submit Interaction</button>
+            </form>
+        </div>
 
-<!-- Database Section -->
-<div class="section" id="database-section">
-<h2>📊 All Vendor Interactions</h2>
-<div class="search-box">
-<input type="text" id="database-search" placeholder="🔍 Filter by vendor, contact, problem type..." onkeyup="filterDatabase()" />
-</div>
-<div class="database-table">
-<table id="data-table">
-<thead>
-<tr>
-<th>Vendor</th>
-<th>Interaction Summary</th>
-<th>Key Contacts</th>
-<th>Detailed Notes</th>
-<th>Date</th>
-</tr>
-</thead>
-<tbody id="table-body">
-<tr>
-<td colspan="5" class="loading">Loading data...</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
+        <!-- Database Section -->
+        <div class="section" id="database-section">
+            <h2>📊 All Vendor Interactions</h2>
+            <div class="search-box">
+                <input type="text" id="database-search" placeholder="🔍 Filter by vendor, contact, problem type..." onkeyup="filterDatabase()" />
+            </div>
+            <div class="database-table">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Vendor</th>
+                            <th>Interaction Summary</th>
+                            <th>Key Contacts</th>
+                            <th>Detailed Notes</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr>
+                            <td colspan="5" class="loading">Loading data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<script>
-// Configuration - Replace these with your n8n webhook URLs
-const CONFIG = {
-chatWebhook: 'https://agelessventures.app.n8n.cloud/webhook/8f26e1fb-cfec-48bb-8324-735aac719f69',
-databaseWebhook: 'https://agelessventures.app.n8n.cloud/webhook/8f26e1fb-cfec-48bb-8324-735aac719f71',
-submitWebhook: 'https://agelessventures.app.n8n.cloud/webhook/8f26e1fb-cfec-48bb-8324-735aac719f70'
-};
+    <script>
+        // Configuration - Replace these with your n8n webhook URLs
+        const CONFIG = {
+            chatWebhook: 'https://agelessventures.app.n8n.cloud/webhook/8f26e1fb-cfec-48bb-8324-735aac719f69',
+            databaseWebhook: 'https://agelessventures.app.n8n.cloud/webhook/8f26e1fb-cfec-48bb-8324-735aac719f71',
+            submitWebhook: 'https://agelessventures.app.n8n.cloud/webhook/8f26e1fb-cfec-48bb-8324-735aac719f70'
+        };
 
-// Chat functionality
+        // Chat functionality
         let uploadedImage = null;
 
-// Generate or retrieve session ID
-function getSessionId() {
-let sessionId = sessionStorage.getItem('chatSessionId');
-if (!sessionId) {
-sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-sessionStorage.setItem('chatSessionId', sessionId);
-}
-return sessionId;
-}
+        // Generate or retrieve session ID
+        function getSessionId() {
+            let sessionId = sessionStorage.getItem('chatSessionId');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('chatSessionId', sessionId);
+            }
+            return sessionId;
+        }
 
         function handleImageUpload(event) {
             const file = event.target.files[0];
@@ -436,15 +432,13 @@ return sessionId;
             document.getElementById('image-upload').value = '';
         }
 
-function sendMessage() {
-const input = document.getElementById('chat-input');
-const message = input.value.trim();
-
-            if (!message) return;
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
             if (!message && !uploadedImage) return;
 
-// Add user message to chat
-            addMessageToChat(message, 'user');
+            // Add user message to chat
             if (message) {
                 addMessageToChat(message, 'user');
             }
@@ -452,12 +446,12 @@ const message = input.value.trim();
                 addImageToChat(uploadedImage, 'user');
             }
             
-input.value = '';
+            input.value = '';
 
-// Disable button while processing
-const sendBtn = document.getElementById('send-btn');
-sendBtn.disabled = true;
-sendBtn.textContent = 'Thinking...';
+            // Disable button while processing
+            const sendBtn = document.getElementById('send-btn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Thinking...';
 
             // Prepare payload
             const payload = { 
@@ -469,22 +463,16 @@ sendBtn.textContent = 'Thinking...';
                 payload.image = uploadedImage;
             }
 
-// Send to n8n webhook with session ID
-fetch(CONFIG.chatWebhook, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json',
-},
-                body: JSON.stringify({ 
-                    question: message,
-                    sessionId: getSessionId()
-                })
+            // Send to n8n webhook with session ID
+            fetch(CONFIG.chatWebhook, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(payload)
-})
-.then(response => response.json())
-.then(data => {
-                // Add bot response
-                addMessageToChat(data.answer || 'Sorry, I couldn\'t process that request.', 'bot');
+            })
+            .then(response => response.json())
+            .then(data => {
                 // Add bot response - strip HTML tags and preserve line breaks
                 const cleanAnswer = (data.answer || 'Sorry, I couldn\'t process that request.')
                     .replace(/<[^>]*>/g, '')  // Remove HTML tags
@@ -493,25 +481,25 @@ headers: {
                 
                 // Clear uploaded image after sending
                 removeImage();
-})
-.catch(error => {
-addMessageToChat('Sorry, there was an error connecting to the AI. Please check your webhook configuration.', 'bot');
-console.error('Chat error:', error);
-})
-.finally(() => {
-sendBtn.disabled = false;
-sendBtn.textContent = 'Send';
-});
-}
+            })
+            .catch(error => {
+                addMessageToChat('Sorry, there was an error connecting to the AI. Please check your webhook configuration.', 'bot');
+                console.error('Chat error:', error);
+            })
+            .finally(() => {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send';
+            });
+        }
 
-function addMessageToChat(text, sender) {
-const messagesDiv = document.getElementById('chat-messages');
-const messageDiv = document.createElement('div');
-messageDiv.className = `message ${sender}-message`;
-messageDiv.textContent = text;
-messagesDiv.appendChild(messageDiv);
-messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
+        function addMessageToChat(text, sender) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
 
         function addImageToChat(imageSrc, sender) {
             const messagesDiv = document.getElementById('chat-messages');
@@ -527,12 +515,12 @@ messagesDiv.scrollTop = messagesDiv.scrollHeight;
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-// Allow Enter key to send message
-document.getElementById('chat-input').addEventListener('keypress', function(e) {
-if (e.key === 'Enter') {
-sendMessage();
-}
-});
+        // Allow Enter key to send message
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
         // Allow pasting images from clipboard
         document.getElementById('chat-input').addEventListener('paste', function(e) {
@@ -574,108 +562,108 @@ sendMessage();
             }
         });
 
-// Load database data
-function loadDatabaseData() {
-fetch(CONFIG.databaseWebhook)
-.then(response => response.json())
-.then(data => {
-displayDatabaseData(data.records || []);
-})
-.catch(error => {
-document.getElementById('table-body').innerHTML = 
-'<tr><td colspan="5" class="loading">Error loading data. Please check your webhook configuration.</td></tr>';
-console.error('Database load error:', error);
-});
-}
+        // Load database data
+        function loadDatabaseData() {
+            fetch(CONFIG.databaseWebhook)
+            .then(response => response.json())
+            .then(data => {
+                displayDatabaseData(data.records || []);
+            })
+            .catch(error => {
+                document.getElementById('table-body').innerHTML = 
+                    '<tr><td colspan="5" class="loading">Error loading data. Please check your webhook configuration.</td></tr>';
+                console.error('Database load error:', error);
+            });
+        }
 
-function displayDatabaseData(records) {
-const tbody = document.getElementById('table-body');
+        function displayDatabaseData(records) {
+            const tbody = document.getElementById('table-body');
+            
+            if (records.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="loading">No records found. Submit your first interaction below!</td></tr>';
+                return;
+            }
 
-if (records.length === 0) {
-tbody.innerHTML = '<tr><td colspan="5" class="loading">No records found. Submit your first interaction below!</td></tr>';
-return;
-}
+            tbody.innerHTML = records.map(record => `
+                <tr>
+                    <td>${record.vendor || 'N/A'}</td>
+                    <td>${record.summary || 'N/A'}</td>
+                    <td style="white-space: pre-line;">${record.contacts || 'N/A'}</td>
+                    <td style="white-space: pre-line;">${record.notes || 'N/A'}</td>
+                    <td>${record.date || 'N/A'}</td>
+                </tr>
+            `).join('');
+        }
 
-tbody.innerHTML = records.map(record => `
-               <tr>
-                   <td>${record.vendor || 'N/A'}</td>
-                   <td>${record.summary || 'N/A'}</td>
-                   <td style="white-space: pre-line;">${record.contacts || 'N/A'}</td>
-                   <td style="white-space: pre-line;">${record.notes || 'N/A'}</td>
-                   <td>${record.date || 'N/A'}</td>
-               </tr>
-           `).join('');
-}
+        // Filter database
+        function filterDatabase() {
+            const searchTerm = document.getElementById('database-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#table-body tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
 
-// Filter database
-function filterDatabase() {
-const searchTerm = document.getElementById('database-search').value.toLowerCase();
-const rows = document.querySelectorAll('#table-body tr');
+        // Form submission
+        document.getElementById('submission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-rows.forEach(row => {
-const text = row.textContent.toLowerCase();
-row.style.display = text.includes(searchTerm) ? '' : 'none';
-});
-}
+            // Disable button while submitting
+            const submitBtn = document.querySelector('#submission-form .btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
 
-// Form submission
-document.getElementById('submission-form').addEventListener('submit', function(e) {
-e.preventDefault();
+            const formData = {
+                vendorName: document.getElementById('vendor-name').value,
+                interactionSummary: document.getElementById('interaction-summary').value,
+                helpfulContacts: document.getElementById('helpful-contacts').value,
+                detailedNotes: document.getElementById('detailed-notes').value,
+                submittedDate: new Date().toISOString()
+            };
 
-// Disable button while submitting
-const submitBtn = document.querySelector('#submission-form .btn');
-submitBtn.disabled = true;
-submitBtn.textContent = 'Submitting...';
+            fetch(CONFIG.submitWebhook, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    const successMsg = document.getElementById('success-message');
+                    successMsg.style.display = 'block';
+                    setTimeout(() => successMsg.style.display = 'none', 5000);
 
-const formData = {
-vendorName: document.getElementById('vendor-name').value,
-interactionSummary: document.getElementById('interaction-summary').value,
-helpfulContacts: document.getElementById('helpful-contacts').value,
-detailedNotes: document.getElementById('detailed-notes').value,
-submittedDate: new Date().toISOString()
-};
+                    // Reset form
+                    document.getElementById('submission-form').reset();
 
-fetch(CONFIG.submitWebhook, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json',
-},
-body: JSON.stringify(formData)
-})
-.then(response => {
-if (response.ok) {
-// Show success message
-const successMsg = document.getElementById('success-message');
-successMsg.style.display = 'block';
-setTimeout(() => successMsg.style.display = 'none', 5000);
+                    // Reload database
+                    loadDatabaseData();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                // Show error message
+                const errorMsg = document.getElementById('error-message');
+                errorMsg.style.display = 'block';
+                setTimeout(() => errorMsg.style.display = 'none', 5000);
+                console.error('Submission error:', error);
+            })
+            .finally(() => {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Interaction';
+            });
+        });
 
-// Reset form
-document.getElementById('submission-form').reset();
-
-// Reload database
-loadDatabaseData();
-} else {
-throw new Error('Submission failed');
-}
-})
-.catch(error => {
-// Show error message
-const errorMsg = document.getElementById('error-message');
-errorMsg.style.display = 'block';
-setTimeout(() => errorMsg.style.display = 'none', 5000);
-console.error('Submission error:', error);
-})
-.finally(() => {
-// Re-enable button
-submitBtn.disabled = false;
-submitBtn.textContent = 'Submit Interaction';
-});
-});
-
-// Load data on page load
-window.addEventListener('load', function() {
-loadDatabaseData();
-});
-</script>
+        // Load data on page load
+        window.addEventListener('load', function() {
+            loadDatabaseData();
+        });
+    </script>
 </body>
 </html>
