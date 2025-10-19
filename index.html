@@ -303,24 +303,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>📋 Vendor Contact Repository</h1>
+        <h1>📋 Program Contacts and Intelligence Hub</h1>
 
         <!-- Chat Section -->
         <div class="section" id="chat-section">
-            <h2>💬 Ask About Vendors</h2>
+            <h2>💬 Program and Contact Assistant</h2>
             <div class="chat-messages" id="chat-messages">
-                <div class="message bot-message">👋 Hello! I'm here to help you find or submit internal or external contacts or programs that can help you or your colleagues in your business. Ask me anything about vendors, problems you are looking to overcome, or internal or external funds that might be of interest to you. For example: "Do we have any warchest funds for takeouts?" or "Show me who we escalated issues to at Dell who help to get around a pricing issue."</div>
+                <div class="message bot-message">👋 Welcome! I can help you find or log programs, partner contacts, and insights that have helped others succeed. Ask me about available funds, escalation paths, or helpful contacts across internal and external programs — for example:
+
+"Do we have any current takeout incentives for hardware?" or "Who helped escalate supply chain delays with HP?"</div>
             </div>
             <div class="chat-input-container">
                 <div class="input-wrapper">
-                    <input type="text" id="chat-input" placeholder="Ask about vendors, contacts, or past issues..." />
+                    <input type="text" id="chat-input" placeholder="Ask questions or submit entries about programs, partners, and contacts. You can paste screenshots to submit details easily!" />
                     <div class="file-upload-container" id="image-preview-container" style="display: none;">
                         <img id="image-preview" class="image-preview" />
                         <button class="remove-image" onclick="removeImage()">×</button>
                     </div>
                 </div>
-                <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)" />
-                <button class="upload-btn" onclick="document.getElementById('image-upload').click()">Image</button>
                 <button class="btn" id="send-btn" onclick="sendMessage()">Send</button>
             </div>
         </div>
@@ -332,17 +332,17 @@
             <div class="error-message" id="error-message">❌ Error submitting. Please try again.</div>
             <form id="submission-form">
                 <div class="form-group">
-                    <label for="vendor-name">Vendor *</label>
-                    <input type="text" id="vendor-name" required placeholder="e.g., Dell, HP, ComputaCenter (Internal), CDW..." />
+                    <label for="vendor-name">Program or Partner *</label>
+                    <input type="text" id="vendor-name" required placeholder="e.g., Dell, HP, Computacenter (Internal), CDW..." />
                 </div>
 
                 <div class="form-group">
-                    <label for="interaction-summary">What was this interaction about? *</label>
+                    <label for="interaction-summary">What was this about? *</label>
                     <textarea id="interaction-summary" required placeholder="Brief summary... (e.g., 'Used a special promotion to close a large laptop deal' or 'Found a workaround for their supply chain issue')"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="helpful-contacts">Contacts Who Helped You</label>
+                    <label for="helpful-contacts">Helpful Contacts</label>
                     <textarea id="helpful-contacts" placeholder="Paste signature blocks or contact info here. You can include multiple contacts.
 
 Example:
@@ -367,16 +367,16 @@ jane.doe@vendor.com"></textarea>
 
         <!-- Database Section -->
         <div class="section" id="database-section">
-            <h2>📊 All Vendor Interactions</h2>
+            <h2>📊 Program and Contact Full Database</h2>
             <div class="search-box">
-                <input type="text" id="database-search" placeholder="🔍 Filter by vendor, contact, problem type..." onkeyup="filterDatabase()" />
+                <input type="text" id="database-search" placeholder="🔍 Filter by program, partner, contact, or topic..." onkeyup="filterDatabase()" />
             </div>
             <div class="database-table">
                 <table id="data-table">
                     <thead>
                         <tr>
-                            <th>Vendor</th>
-                            <th>Interaction Summary</th>
+                            <th>Program / Partner</th>
+                            <th>Summary</th>
                             <th>Key Contacts</th>
                             <th>Detailed Notes</th>
                             <th>Date</th>
@@ -436,11 +436,18 @@ jane.doe@vendor.com"></textarea>
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             
-            if (!message && !uploadedImage) return;
+            // If there's an image but no text, add default prompt
+            if (uploadedImage && !message) {
+                input.value = "Please analyze this image and extract any vendor, contact, or interaction information.";
+            }
+            
+            const finalMessage = input.value.trim();
+            
+            if (!finalMessage && !uploadedImage) return;
 
             // Add user message to chat
-            if (message) {
-                addMessageToChat(message, 'user');
+            if (finalMessage) {
+                addMessageToChat(finalMessage, 'user');
             }
             if (uploadedImage) {
                 addImageToChat(uploadedImage, 'user');
@@ -455,7 +462,7 @@ jane.doe@vendor.com"></textarea>
 
             // Prepare payload
             const payload = { 
-                question: message,
+                question: finalMessage,
                 sessionId: getSessionId()
             };
 
