@@ -86,6 +86,7 @@
         .chat-input-container {
             display: flex;
             gap: 10px;
+            align-items: flex-end;
         }
 
         #chat-input {
@@ -95,6 +96,60 @@
             border-radius: 8px;
             font-size: 16px;
             transition: border-color 0.3s;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-upload-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #image-upload {
+            display: none;
+        }
+
+        .upload-btn {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+            min-width: 110px;
+        }
+
+        .upload-btn:hover {
+            background: #5568d3;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .remove-image {
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
         }
 
         #chat-input:focus {
@@ -254,12 +309,18 @@
         <div class="section" id="chat-section">
             <h2>💬 Ask About Vendors</h2>
             <div class="chat-messages" id="chat-messages">
-                <div class="message bot-message">
-                    👋 Hello! I'm here to help you find or submit internal or external contacts or programs that can help you or your colleagues in your business. Ask me anything about vendors, problems you are looking to overcome, or internal or external funds that might be of interest to you. For example: "Do we have any warchest funds for takeouts?" or "Show me who we escalated issues to at Dell who help to get around a pricing issue."
-                </div>
+                <div class="message bot-message">👋 Hello! I'm here to help you find or submit internal or external contacts or programs that can help you or your colleagues in your business. Ask me anything about vendors, problems you are looking to overcome, or internal or external funds that might be of interest to you. For example: "Do we have any warchest funds for takeouts?" or "Show me who we escalated issues to at Dell who help to get around a pricing issue."</div>
             </div>
             <div class="chat-input-container">
-                <input type="text" id="chat-input" placeholder="Ask about vendors, contacts, or past issues..." />
+                <div class="input-wrapper">
+                    <input type="text" id="chat-input" placeholder="Ask about vendors, contacts, or past issues..." />
+                    <div class="file-upload-container" id="image-preview-container" style="display: none;">
+                        <img id="image-preview" class="image-preview" />
+                        <button class="remove-image" onclick="removeImage()">×</button>
+                    </div>
+                </div>
+                <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)" />
+                <button class="upload-btn" onclick="document.getElementById('image-upload').click()">Image</button>
                 <button class="btn" id="send-btn" onclick="sendMessage()">Send</button>
             </div>
         </div>
@@ -340,6 +401,8 @@ jane.doe@vendor.com"></textarea>
         };
 
         // Chat functionality
+        let uploadedImage = null;
+
         // Generate or retrieve session ID
         function getSessionId() {
             let sessionId = sessionStorage.getItem('chatSessionId');
@@ -350,14 +413,39 @@ jane.doe@vendor.com"></textarea>
             return sessionId;
         }
 
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImage = e.target.result;
+                    document.getElementById('image-preview').src = uploadedImage;
+                    document.getElementById('image-preview-container').style.display = 'flex';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeImage() {
+            uploadedImage = null;
+            document.getElementById('image-preview-container').style.display = 'none';
+            document.getElementById('image-upload').value = '';
+        }
+
         function sendMessage() {
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             
-            if (!message) return;
+            if (!message && !uploadedImage) return;
 
             // Add user message to chat
-            addMessageToChat(message, 'user');
+            if (message) {
+                addMessageToChat(message, 'user');
+            }
+            if (uploadedImage) {
+                addImageToChat(uploadedImage, 'user');
+            }
+            
             input.value = '';
 
             // Disable button while processing
@@ -365,21 +453,34 @@ jane.doe@vendor.com"></textarea>
             sendBtn.disabled = true;
             sendBtn.textContent = 'Thinking...';
 
+            // Prepare payload
+            const payload = { 
+                question: message,
+                sessionId: getSessionId()
+            };
+
+            if (uploadedImage) {
+                payload.image = uploadedImage;
+            }
+
             // Send to n8n webhook with session ID
             fetch(CONFIG.chatWebhook, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
-                    question: message,
-                    sessionId: getSessionId()
-                })
+                body: JSON.stringify(payload)
             })
             .then(response => response.json())
             .then(data => {
-                // Add bot response
-                addMessageToChat(data.answer || 'Sorry, I couldn\'t process that request.', 'bot');
+                // Add bot response - strip HTML tags and preserve line breaks
+                const cleanAnswer = (data.answer || 'Sorry, I couldn\'t process that request.')
+                    .replace(/<[^>]*>/g, '')  // Remove HTML tags
+                    .replace(/\*\*/g, '');     // Remove markdown bold
+                addMessageToChat(cleanAnswer, 'bot');
+                
+                // Clear uploaded image after sending
+                removeImage();
             })
             .catch(error => {
                 addMessageToChat('Sorry, there was an error connecting to the AI. Please check your webhook configuration.', 'bot');
@@ -400,10 +501,64 @@ jane.doe@vendor.com"></textarea>
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
+        function addImageToChat(imageSrc, sender) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.style.maxWidth = '300px';
+            img.style.maxHeight = '200px';
+            img.style.borderRadius = '8px';
+            messageDiv.appendChild(img);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
         // Allow Enter key to send message
         document.getElementById('chat-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
+            }
+        });
+
+        // Allow pasting images from clipboard
+        document.getElementById('chat-input').addEventListener('paste', function(e) {
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    e.preventDefault();
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        uploadedImage = event.target.result;
+                        document.getElementById('image-preview').src = uploadedImage;
+                        document.getElementById('image-preview-container').style.display = 'flex';
+                    };
+                    reader.readAsDataURL(blob);
+                    break;
+                }
+            }
+        });
+
+        // Also allow pasting anywhere in the chat section
+        document.getElementById('chat-section').addEventListener('paste', function(e) {
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    e.preventDefault();
+                    const blob = items[i].getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        uploadedImage = event.target.result;
+                        document.getElementById('image-preview').src = uploadedImage;
+                        document.getElementById('image-preview-container').style.display = 'flex';
+                        // Focus back on input
+                        document.getElementById('chat-input').focus();
+                    };
+                    reader.readAsDataURL(blob);
+                    break;
+                }
             }
         });
 
