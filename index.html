@@ -478,8 +478,9 @@ jane.doe@vendor.com"></textarea>
             })
             .then(response => response.json())
             .then(data => {
-                // Add bot response - strip HTML tags and preserve line breaks
-                const cleanAnswer = (data.answer || 'Sorry, I couldn\'t process that request.')
+                // Add bot response - handle multiple possible response formats
+                const rawAnswer = data.answer || data.output || data.text || data.response || 'Sorry, I couldn\'t process that request.';
+                const cleanAnswer = rawAnswer
                     .replace(/<[^>]*>/g, '')  // Remove HTML tags
                     .replace(/\*\*/g, '');     // Remove markdown bold
                 addMessageToChat(cleanAnswer, 'bot');
